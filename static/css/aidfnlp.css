@@ -1,0 +1,176 @@
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: auto;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+}
+
+input[type=range]{
+    width: 70%;
+    float: right;
+    display: inline;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+.center {
+    margin: auto;
+    width: 70%;
+}
+
+textarea[type=text]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: auto;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+div[id=org]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: auto;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow:auto;
+  height: auto;
+  min-height: 20px;
+  max-height: 500px;
+  line-height: 50pt;
+}
+
+div[id=AR]{
+  width: 100%;
+  display: none;
+}
+
+div[id=res]{
+  width: 100%;
+  display: none;
+}
+
+token {
+  margin-left: 6px;
+}
+
+elem[type="org"] {
+  position: relative;
+}
+
+elem[type="org"]::after {
+  content: "";
+  position: absolute;
+  top: -1em;
+  left: 3%;
+  width: 94%;
+  height: 0.5em;
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+  border-right: 1px solid #aaa;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  z-index: 10;
+}
+
+.label {
+  position: absolute;
+  top: -3em;
+  left: 3%;
+  width: 94%;
+  z-index: 10;
+  text-align: center;
+}
+
+.label:after {
+  content: "|";
+  position: absolute;
+  top: 1.2em;
+  left: 3%;
+  width: 94%;
+  z-index: 10;
+  text-align: center;
+  color: #aaa;
+}
+
+.org {
+  color: blue;
+}
+
+.highlight{
+  color: blue;
+  background-color: yellow;
+}
+
+div[id=langopt]{
+    width: 40%;
+    height: auto;
+    display: inline;
+    float: left;
+    position: relative;
+}
+
+div[id=langmsg]{
+    width: 60%;
+    height: auto;
+    display: none;
+    float: right;
+    position: relative;
+}
+
+div[id=org-selected]{
+    width: 50%;
+    height: auto;
+    display: inline;
+    float: left;
+    position: relative;
+}
+
+div[id=org-input]{
+    width: 50%;
+    height: auto;
+    display: inline;
+    float: right;
+    position: relative;
+}
+
+div[id=self-sentiment]{
+    width: 50%;
+    height: auto;
+    display: inline;
+    float: right;
+    position: relative;
+}
+
+.select {
+    border:1px solid #e3e3e3;
+    border-radius:3px;
+    color:#616263;
+    overflow: hidden;
+    height: 40px;
+    width: 40%;
+    position: relative;
+    display: block;
+}
+
+.select:after {
+    content:"▼";
+    padding: 12px 8px;
+    position: absolute; right: 10px; top: 0;
+    z-index: 1;
+    text-align: center;
+    width: 10%;
+    height: 100%;
+    pointer-events: none;
+    box-sizing: border-box;
+}

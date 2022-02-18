@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AIDF-NLP{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/aidfnlp.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="center" id="text-nlp" name="text-nlp">
+        <p>
+            <label>User Guide</label>
+            <div>
+                user guide demo
+            </div>
+        </p>
+
+        <p>
+            <label>Text</label>
+            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-html="true" title="text">
+                <i class="fas fa-info-circle"></i>
+            </span>
+            <textarea type="text" id="text-input" name="text-input"
+                      placeholder="Please paste paragraph here..." onkeyup="findORG()"></textarea>
+        </p>
+
+        <div id="langopt">
+          <label for="lang">Language</label>
+              <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-html="true" title="Language">
+                  <i class="fas fa-info-circle"></i>
+              </span>
+          <div class="select">
+              <select name="languages" id="lang" onchange="findORG()">
+                <option value=0>Chinese</option>
+                <option value=1 selected="selected">English</option>
+                <option value=2>Indonesian</option>
+              </select>
+          </div>
+        </div>
+
+        <div id="langmsg">
+            <div id="langdet">
+            </div>
+            <div>
+              <input type="radio" name="langdetopt" value=0 onclick="switchLanguage(this)">
+              <label>No, just keep the original choice!</label>
+            </div>
+            <div>
+              <input type="radio" name="langdetopt" value=1 onclick="switchLanguage(this)">
+              <label>Yes, switch to detected language!</label>
+            </div>
+
+        </div>
+
+        </br></br></br></br>
+
+        <div id="AR">
+            <label>Auto Recognition</label>
+            <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-html="true" title="auto recognition">
+                <i class="fas fa-info-circle"></i>
+            </span></br>
+
+            <div id="org-selected" name ="org-selected"></div>
+            <div id="org-input" name ="org-input">
+                <textarea type="text" id="orginput" onkeyup="checkMR()" placeholder="Please input unidentified entity(ies) here, separated by comma!"></textarea>
+                <div id="org-input-msg" name="org-input-msg"></div>
+            </div>
+            </br></br>
+
+            <div id="org" name="org"></div>
+
+            </br></br>
+            <div id="nlp-method">
+                <label>Method</label>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-html="true" title="method">
+                    <i class="fas fa-info-circle"></i>
+                </span></br>
+                <input type="checkbox" name="nlp-method" value="1"/>Topic(Source-LDA)</br>
+                <input type="checkbox" name="nlp-method" value="2"/>Sentiment(BERT)
+            </div>
+
+            </br>
+
+            <div id="topic">
+                <label>Personal Topic Weight (Optional)</label>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-html="true" title="personal topic weight">
+                    <i class="fas fa-info-circle"></i>
+                </span></br>
+                <div>
+                    <label for="credit-weight">Credit</label>
+                    <input type="range" id="credit-weight" name="credit-weight" min="0" max="1" step="0.05" onchange="credit.value=this.value * 100 + '%'"/>
+                    <output id="credit" for="credit-weight" style="display:inline;"></output></br>
+                </div>
+                <div>
+                    <label for="greeness-weight">Greeness</label>
+                    <input type="range" id="greeness-weight" name="greeness-weight" min="0" max="1" step="0.05" onchange="greeness.value=this.value * 100 + '%'"/>
+                    <output id="greeness" for="greeness-weight" style="display:inline;"></output></br>
+                </div>
+            </div>
+            </br>
+
+            <div id="sentiment">
+                <label>Personal Sentiment Tendency (Optional)</label>
+                <span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-html="true" title="personal sentiment tendency">
+                    <i class="fas fa-info-circle"></i>
+                </span></br>
+                <ol>
+                    <div id="sentiment-select">
+
+                    </div>
+                </ol>
+
+
+            </div>
+
+            <center><button id="submit" onclick="nlp()">Submit</button></center>
+        </div>
+
+
+
+        <div id="res">
+        </div>
+
+    </div>
+
+{% endblock %}

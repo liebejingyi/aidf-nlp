@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- meta tag first! -->
+    <title>{% block title %}base{% endblock %}</title>
+    {% load static %}
+    <!-- Bootstrap -->
+    <link href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'DataTables/datatables.min.css' %}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+      <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <![endif]-->
+    {% block css %}{% endblock %}
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my-nav" aria-expanded="false">
+            <span class="sr-only">switch navbar</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">AIDF-NLP</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+<!--        <div class="collapse navbar-collapse" id="my-nav">-->
+<!--          <ul class="nav navbar-nav">-->
+<!--            <li class="active"><a href="/index/">Front Page</a></li>-->
+<!--            <li class="active"><a href="/equity/real/">Equity Page</a></li>-->
+<!--            <li class="active"><a href="/personal/balance/">Personal Page</a></li>-->
+<!--          </ul>-->
+<!--          <ul class="nav navbar-nav navbar-right">-->
+<!--            {% if request.session.is_login %}-->
+<!--                <li><a href="#">Current Login:{{ request.session.user_name }}</a></li>-->
+<!--                <li><a href="/logout/">Logout</a></li>-->
+<!--            {% else %}-->
+<!--                <li><a href="/login/">Login</a></li>-->
+<!--                <li><a href="/register/">Register</a></li>-->
+<!--            {% endif %}-->
+<!--          </ul>-->
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div id="acc-cookies" class="bottom-cookies">
+        <div style="font-size:16px;margin:15px 40px 10px 40px;color:#ffffff;">Privacy Notice</div>
+        <div style="font-size:16px;margin:5px 40px 5px 40px;color:#ffffff;">This site uses cookies. By clicking accept or continuing to use this site, you agree to our use of cookies. For more details about cookies and how to manage them, please see our <a href="https://nus.edu.sg/privacy-notice" target="_blank">Privacy Notice</a></div>
+        <button onclick="setCookie()" id="accpt" style="font-size:18px;margin:10px 40px 10px 40px;color:#ffffff;background-color:#ef7c00;border:none;width:80px;height:40px;float:right;">Accept</button>
+    </div>
+
+    {% block content %}{% endblock %}
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'DataTables/datatables.min.js' %}"></script>
+    <script src="{% static 'js/personal.js' %}"></script>
+    <script>
+      function setCookie(){
+          var exp = new Date();
+          exp.setTime(exp.getTime() + 24*60*60*1000);
+          document.cookie = "accpt=yes;path=/;expires=" + exp.toGMTString();
+          console.log(document.cookie);
+          $("#acc-cookies").hide();
+      };
+
+      function getCookie(name){
+          var arr = document.cookie.match(new RegExp("(^| )"+name+"=([^;]*)(;|$)"));
+          if(arr != null) return unescape(arr[2]); return null;
+      }
+
+      $(document).ready(function() {
+          var accptValue = getCookie("accpt");
+          console.log(accptValue);
+          if (accptValue == 'yes') {
+              $("#acc-cookies").hide();
+          } else {
+              $("#acc-cookies").show();
+          }
+      });
+      </script>
+      <style>
+        .bottom-cookies {
+            bottom:0;
+            position:fixed;
+            z-index:150;
+            _position:absolute;
+            _top:expression(eval(document.documentElement.scrollTop+
+                (document.documentElement.clientHeight-this.offsetHeight)));
+            height:150px;
+            width: 100%;
+            background-color: #808080;
+        }
+      </style>
+
+  </body>
+</html>
