@@ -32,7 +32,12 @@ function org_recommend_endpoint(req::HTTP.Request, res::HTTP.Response)
     else
         textInput = [qparams["textInput"][30:80]]
     end
-    org = JSON.json(Dict("org"=>textInput,"language"=>"English","error"=>false))
+    if qparams["textInput"][1] == 'N'
+        l = "English"
+    else
+        l = "Japanese"
+    end
+    org = JSON.json(Dict("org"=>textInput,"language"=>l,"error"=>false))
 
     res.body = bytes(org)
     return (req, res)
