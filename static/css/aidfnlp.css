@@ -35,6 +35,10 @@ textarea[type=text]{
   overflow-y: scroll;
 }
 
+textarea[type=text]:focus {
+  background-color: lightblue;
+}
+
 div[id=org]{
   width: 100%;
   padding: 12px 20px;
@@ -120,7 +124,15 @@ div[id=langopt]{
     position: relative;
 }
 
-div[id=langmsg]{
+div[id=langmsg1]{
+    width: 60%;
+    height: auto;
+    display: none;
+    float: right;
+    position: relative;
+}
+
+div[id=langmsg2]{
     width: 60%;
     height: auto;
     display: none;

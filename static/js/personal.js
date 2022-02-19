@@ -28,14 +28,24 @@ function findORG(){
         if (xhr.readyState == XMLHttpRequest.DONE) {
             var org = JSON.parse(xhr.responseText)["org"];
             var language = JSON.parse(xhr.responseText)["language"];
-            if (language != multi_language[lang]) {
-                langmsg = "Inconsistency between the detected text language (<b>"+language+"</b>) and the selected language. Please select whether to switch";
-                document.getElementById("langdet").innerHTML = langmsg;
-                languageIndex = multi_language.indexOf(language);
-                document.getElementById("langdet").value = [lang,languageIndex];
-                document.getElementById("langmsg").style.display="inline-block";
+            if (multi_language.indexOf(language) != -1) {
+                document.getElementById("langmsg2").style.display="none";
+                if (language != multi_language[lang]) {
+                    langmsg = "Inconsistency between the detected text language (<b>"+language+"</b>) and the selected language. Please select whether to switch";
+                    document.getElementById("langdet1").innerHTML = langmsg;
+                    languageIndex = multi_language.indexOf(language);
+                    document.getElementById("langdet1").value = [lang,languageIndex];
+                    document.getElementById("langmsg1").style.display="inline-block";
+                } else {
+                    document.getElementById("langmsg1").style.display="none";
+                }
             } else {
-                document.getElementById("langmsg").style.display="none";
+                document.getElementById("langmsg1").style.display="none";
+                langmsg = "The detected text language (<b>"+language+"</b>) not supported currently. Please confirm whether to <b>change the paragraph</b>";
+                document.getElementById("langdet2").innerHTML = langmsg;
+                document.getElementById("langmsg2").style.display="inline-block";
+                document.getElementById("text-input").style.borderColor="red";
+                document.getElementById("text-input").style.backgroundColor='pink';
             }
             if (org != null) {
                 orgdisplay = document.getElementById("org");
@@ -143,9 +153,14 @@ function getPTW(){
     return {'credit':credit,'greeness':greeness}
 }
 
-function switchLanguage(langdetopt){
-    var opt = langdetopt.value;
-    var lang = document.getElementById("langdet").value[opt];
+function changePara(langdetopt2){
+    document.getElementById("text-input").style.borderColor="black";
+    document.getElementById("text-input").style.backgroundColor='white';
+}
+
+function switchLanguage(langdetopt1){
+    var opt = langdetopt1.value;
+    var lang = document.getElementById("langdet1").value[opt];
     langopt = document.getElementById("lang");
     langopt[lang].selected = true;
 
